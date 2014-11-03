@@ -1,0 +1,5 @@
+falcon==0.1.10
+python-mimeparse==0.1.4
+schematics==1.0-0
+six==1.8.0
+wsgiref==0.1.2
