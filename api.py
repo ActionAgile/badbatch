@@ -11,13 +11,14 @@ from models import Recipient, RecipientStore, InvalidUKMobileNumberException
 
 rs = RecipientStore()
 
+
 class RecipientResource:
 
     def on_post(self, req, resp):
         """Handles POST requests"""
-        payload = json.loads(req.stream.read())   
+        payload = json.loads(req.stream.read())
         logger.debug('Recieved {} '.format(payload))
-        try: 
+        try:
             r = Recipient(payload)
             r.validate()
             key = rs.add(r)
@@ -25,8 +26,8 @@ class RecipientResource:
         except InvalidUKMobileNumberException, e:
             logger.error(e)
             raise falcon.HTTPBadRequest(
-            'You need to supply a valid UK mobile number.',
-            'See docs for more details.')
+                'You need to supply a valid UK mobile number.',
+                'See docs for more details.')
 
 
 api = falcon.API()
